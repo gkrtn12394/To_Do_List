@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="Member">
+
+    <insert id="mapCreateMember" parameterType="Member">
+        <![CDATA[
+		    insert into members (nick, pw, email) values (#{nick}, #{pw}, #{email});
+	    ]]>
+    </insert>
+
+    <update id="mapUpdateMember" parameterType="Member">
+        <![CDATA[
+		    update members set nick = #{nick}, pw = #{pw}, email = #{email} where id = #{id};
+	    ]]>
+    </update>
+
+    <select id="mapFindMemberById" parameterType="long" resultType="Member">
+        <![CDATA[
+		    select * from members where id = #{id};
+	    ]]>
+    </select>
+
+    <select id="mapFindMemberByNick" parameterType="string" resultType="Member">
+        <![CDATA[
+		    select * from members where nick = #{nick};
+	    ]]>
+    </select>
+
+    <select id="mapFindAllMembers" resultType="Member" resultSets="list">
+        <![CDATA[
+		    select * from members;
+	    ]]>
+    </select>
+
+</mapper>
