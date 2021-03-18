@@ -1,6 +1,6 @@
-package com.To_Do_List.domain;
+package com.To_Do_List.controller.form;
 
-public class Item {
+public class ItemForm {
     private long id;
     private String title;
     private String note;
@@ -8,16 +8,10 @@ public class Item {
     private String regDate;
     private String dueDate;
 
-    public long getId() {
-        return id;
-    }
-    public void setId(long id) {
-        this.id = id;
-    }
+    public long getId() { return id; }
+    public void setId(long id) { this.id = id; }
 
-    public String getTitle() {
-        return title;
-    }
+    public String getTitle() { return title; }
     public void setTitle(String title) {
         this.title = title;
     }

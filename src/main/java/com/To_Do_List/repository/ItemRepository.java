@@ -6,9 +6,8 @@ import java.util.List;
 import java.util.Optional;
 
 public interface ItemRepository {
-    Item save(Item item);
-    Optional<Item> findById(long id);
-    Optional<Item> findByName(String name);
-    void updateById(long id, Item item);
-    List<Item> findAll();
+    int createItem(Item item);
+    int updateItem(Item item);
+    int deleteItem(long id);
+    List<Item> findAll(String nick);
 }

@@ -23,6 +23,13 @@ public class MemberController {
         this.memberService = memberService;
     }
 
+
+    // 계정 생성
+    @GetMapping("/test")
+    public String test(){
+        return "/test";
+    }
+
     // 계정 생성
     @GetMapping("/member/create")
     public String createMember(){
@@ -67,20 +74,12 @@ public class MemberController {
     }
 
     // 계정 조회 by id
-    @GetMapping("/member/find")
-    public String findMember(@RequestParam(name = "id", required = false, defaultValue = "0") String id,
-                             @RequestParam(name = "nick", required = false, defaultValue = "") String nick,
+    @GetMapping("/members")
+    public String findMember(@RequestParam(name = "nick", required = false, defaultValue = "") String nick,
                              Model model){
         List<Member> members = new ArrayList<>();
 
-        if(!id.equals("0")) {
-            Optional<Member> m = memberService.findByID(Long.parseLong(id));
-
-            if (m.isPresent()) {
-                Member member = m.get();
-                members.add(member);
-            }
-        } else if(!nick.equals("")) {
+        if(!nick.equals("")) {
             Optional<Member> m = memberService.findByNick(nick);
 
             if (m.isPresent()) {
@@ -95,35 +94,4 @@ public class MemberController {
 
         return "/member/find";
     }
-
-//    // 계정 조회 by nick
-//    @GetMapping("/member/find-nick")
-//    public String findMemberByNick(@RequestParam(name = "nick", required = false, defaultValue = "0") String nick, Model model){
-//        Member member = new Member();
-//
-//        if(!nick.equals("")) {
-//            Optional<Member> m = memberService.findByNick(nick);
-//
-//            if (m.isPresent())
-//                member = m.get();
-//        }
-//
-//        model.addAttribute("member", member);
-//
-//        return "/member/find-nick";
-//    }
-//
-//    @GetMapping("/member/find-nick/{nick}")
-//    public String findMemberByNick(@PathVariable(name = "nick") String nick){
-//        return "/member/find-nick";
-//    }
-//
-//    // 전체 계정 조회
-//    @GetMapping("/member/find-all")
-//    public String findAllMembers(Model model){
-//        List<Member> members = memberService.findAll();
-//        model.addAttribute("members", members);
-//
-//        return "/member/find-all";
-//    }
 }

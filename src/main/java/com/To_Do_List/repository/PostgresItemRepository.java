@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
-import java.util.Optional;
 
 @Repository
 public class PostgresItemRepository implements ItemRepository{
@@ -19,27 +18,31 @@ public class PostgresItemRepository implements ItemRepository{
     }
 
     @Override
-    public Item save(Item item) {
-        return null;
+    public int createItem(Item item) {
+        int n = sqlSession.insert("Item.CreateItem", item);
+
+        if (n > 0) return 1;
+        return -1;
     }
 
     @Override
-    public Optional<Item> findById(long id) {
-        return Optional.empty();
+    public int updateItem(Item item) {
+        int n = sqlSession.update("Item.UpdateItem", item);
+
+        if (n > 0) return 1;
+        return -1;
     }
 
     @Override
-    public Optional<Item> findByName(String name) {
-        return Optional.empty();
+    public int deleteItem(long id) {
+        int n = sqlSession.delete("Item.DeleteItem", id);
+
+        if (n > 0) return 1;
+        return -1;
     }
 
     @Override
-    public void updateById(long id, Item item) {
-
-    }
-
-    @Override
-    public List<Item> findAll() {
-        return null;
+    public List<Item> findAll(String nick) {
+        return sqlSession.selectList("Item.FindItems", nick);
     }
 }

@@ -3,31 +3,31 @@
 
 <mapper namespace="Member">
 
-    <insert id="mapCreateMember" parameterType="Member">
+    <insert id="CreateMember" parameterType="Member">
         <![CDATA[
 		    insert into members (nick, pw, email) values (#{nick}, #{pw}, #{email});
 	    ]]>
     </insert>
 
-    <update id="mapUpdateMember" parameterType="Member">
+    <update id="UpdateMember" parameterType="Member">
         <![CDATA[
 		    update members set nick = #{nick}, pw = #{pw}, email = #{email} where id = #{id};
 	    ]]>
     </update>
 
-    <select id="mapFindMemberById" parameterType="long" resultType="Member">
+    <select id="FindMemberById" parameterType="long" resultType="Member">
         <![CDATA[
 		    select * from members where id = #{id};
 	    ]]>
     </select>
 
-    <select id="mapFindMemberByNick" parameterType="string" resultType="Member">
+    <select id="FindMemberByNick" parameterType="string" resultType="Member">
         <![CDATA[
 		    select * from members where nick = #{nick};
 	    ]]>
     </select>
 
-    <select id="mapFindAllMembers" resultType="Member" resultSets="list">
+    <select id="FindAllMembers" resultType="Member" resultSets="list">
         <![CDATA[
 		    select * from members;
 	    ]]>
