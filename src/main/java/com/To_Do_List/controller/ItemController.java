@@ -24,12 +24,12 @@ public class ItemController {
     }
 
     // Item 추가
-    @GetMapping("item/create")
+    @GetMapping("/item/create")
     public String createItem() {
         return "item/create";
     }
 
-    @PostMapping("item/create")
+    @PostMapping("/item/create")
     public String createItemForm(ItemForm form) {
         Item item = new Item();
         item.setId(form.getId());
@@ -45,7 +45,7 @@ public class ItemController {
     }
 
     // Item 삭제
-    @PostMapping("item/delete")
+    @PostMapping("/item/delete")
     public String deleteItem(@RequestParam(name="id") String id) {
         itemService.delete(Long.parseLong(id));
 
@@ -53,7 +53,7 @@ public class ItemController {
     }
 
     // Item update
-    @PostMapping("item/update")
+    @PostMapping("/item/update")
     public String updateItem(@ModelAttribute(name="item") Item item) {
         itemService.update(item);
 
@@ -61,7 +61,7 @@ public class ItemController {
     }
 
     // Item FindAll
-    @GetMapping("items")
+    @GetMapping("/items")
     public String findAll(@RequestParam(name="nick") String nick) {
         List<Item> item = itemService.findAll(nick);
 
