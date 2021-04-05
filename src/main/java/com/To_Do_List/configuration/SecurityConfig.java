@@ -1,24 +1,27 @@
 package com.To_Do_List.configuration;
 
+import com.To_Do_List.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
-
-import javax.sql.DataSource;
 
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
+    private MemberService memberService;
+
     @Autowired
-    DataSource dataSource;
+    public SecurityConfig(MemberService memberService){
+        this.memberService = memberService;
+    }
 
     @Bean
     public PasswordEncoder passwordEncoder() {
@@ -26,30 +29,32 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     @Override
-    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.
-                jdbcAuthentication()
-                .dataSource(dataSource)
-                .usersByUsernameQuery("select nick, pw, true from members where nick = ?")
-                .authoritiesByUsernameQuery("select nick, role from members where nick = ?");
+    public void configure(WebSecurity web) throws Exception {
     }
 
     @Override
-    protected void configure(HttpSecurity http) throws Exception {
-        http
-                .authorizeRequests()
+    public void configure(HttpSecurity web) throws Exception {
+        web.authorizeRequests()
+                .antMatchers("/").permitAll()
+                .antMatchers("/login").permitAll()
+                .antMatchers("/login-check").permitAll()
                 .antMatchers("/join").permitAll()
                 .antMatchers("/items").permitAll()
-                .antMatchers("/item/*").hasRole("USER")
-                .antMatchers("/member/*").hasRole("USER")
                 .antMatchers("/members").hasRole("USER")
-                .antMatchers("/").permitAll()
+                .antMatchers("/members/**").hasRole("USER")
                 .anyRequest().authenticated()
                 .and()
-                .formLogin().loginPage("/login").permitAll()
-                .failureUrl("/login?error").permitAll()
-                .defaultSuccessUrl("/").permitAll()
+                .formLogin()
+                .loginPage("/login")
+                .defaultSuccessUrl("/")
                 .and()
-                .logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout")).permitAll().logoutSuccessUrl("/");
+                .cors()
+                .and()
+                .csrf().disable();
+    }
+
+    @Override
+    public void configure(AuthenticationManagerBuilder auth) throws Exception {
+        auth.userDetailsService(memberService).passwordEncoder(passwordEncoder());
     }
 }

@@ -1,16 +1,22 @@
 package com.To_Do_List.domain;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Iterator;
+
 public class Member {
     private long id;
     private String nick;
     private String pw;
     private String email;
+    private String role;
 
     public Member() {
         id = 0l;
         nick = "";
         pw = "";
         email = "";
+        role = "";
     }
 
     public long getId() {
@@ -43,5 +49,13 @@ public class Member {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 }

@@ -5,7 +5,6 @@
         <typeAlias type="com.To_Do_List.domain.Member" alias="Member"/>
         <typeAlias type="com.To_Do_List.domain.Follow" alias="Follow"/>
         <typeAlias type="com.To_Do_List.domain.Item" alias="Item"/>
-        <typeAlias type="com.To_Do_List.domain.Item" alias="Item"/>
     </typeAliases>
 <!--    <mappers>-->
 <!--        <mapper resource="mybatis/mapper/member.xml" />-->
