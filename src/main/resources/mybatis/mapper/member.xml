@@ -5,13 +5,13 @@
 
     <insert id="CreateMember" parameterType="Member">
         <![CDATA[
-		    insert into members (nick, pw, email, role) values (#{nick}, #{pw}, #{email}, 'USER');
+		    insert into members (nick, pw, email) values (#{nick}, #{pw}, #{email});
 	    ]]>
     </insert>
 
     <update id="UpdateMember" parameterType="Member">
         <![CDATA[
-		    update members set nick = #{nick}, pw = #{pw}, email = #{email} where id = #{id};
+		    update members set pw = #{pw}, email = #{email} where nick = #{nick};
 	    ]]>
     </update>
 

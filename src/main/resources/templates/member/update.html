@@ -1,22 +1,20 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
 <body>
-    <form action="/member/update" method="post">
+    <form th:action="@{/member/update}" method="post">
         <div class="container">
-            <label for="id">id</label>
-            <input type="text" id="id" name="id" placeholder="수정할 계정의 ID를 입력하세요.">
             <label for="nick">nick</label>
-            <input type="text" id="nick" name="nick" placeholder="nick을 입력하세요.">
+            <input type="text" id="nick" name="nick" placeholder="수정할 계정의 nick을 입력하세요."> <br><br>
             <label for="pw">pw</label>
             <input type="text" id="pw" name="pw" placeholder="pw을 입력하세요.">
             <label for="email">email</label>
             <input type="text" id="email" name="email" placeholder="email을 입력하세요.">
         </div>
-        <button type="submit">등록</button>
+        <button type="submit">수정</button>
     </form>
 </body>
 </html>

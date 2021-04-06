@@ -61,7 +61,6 @@ public class MemberController {
     @PostMapping("/member/update")
     public String updateMemberForm(MemberForm form){
         Member member = new Member();
-        member.setId(form.getId());
         member.setNick(form.getNick());
         member.setPw(form.getPw());
         member.setEmail(form.getEmail());
