@@ -24,28 +24,4 @@ public class LoginController {
     public String loginForm() {
         return "/loginForm";
     }
-
-    @PostMapping("/login-check")
-    public String login(MemberForm memberForm, Model model)
-    {
-        String nick = memberForm.getNick();
-        String pw = memberForm.getPw();
-
-        if(!nick.equals("") && !pw.equals("")) {
-            Member m = memberService.findByNick(nick).get();
-
-            if (m == null)
-                return "/login?error";
-
-            if(m.getPw().equals(pw)) {
-                // login success
-                return "redirect:/";
-            }
-            else {
-                return "/login/error";
-            }
-        }
-
-        return "redirect:/";
-    }
 }

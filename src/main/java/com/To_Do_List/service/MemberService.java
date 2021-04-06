@@ -9,6 +9,7 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -54,6 +55,9 @@ public class MemberService implements UserDetailsService {
         List<GrantedAuthority> authorities = new ArrayList<>();
         authorities.add(new SimpleGrantedAuthority("ROLE_USER"));
 
-        return new User(member.getNick(), member.getPw(), authorities);
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+        String pw = encoder.encode(member.getPw());
+
+        return new User(member.getNick(), pw, authorities);
     }
 }

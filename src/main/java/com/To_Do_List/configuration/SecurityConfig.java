@@ -45,12 +45,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
-                .loginPage("/login")
-                .defaultSuccessUrl("/")
-                .and()
-                .cors()
-                .and()
-                .csrf().disable();
+                .defaultSuccessUrl("/");
     }
 
     @Override
