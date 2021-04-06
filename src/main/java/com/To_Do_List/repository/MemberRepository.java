@@ -11,4 +11,5 @@ public interface MemberRepository {
     Optional<Member> findMemberById(long id);
     Optional<Member> findMemberByNick(String nick);
     List<Member> findAllMembers();
+    int nickCheck(String nick);
 }

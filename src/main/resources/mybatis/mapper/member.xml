@@ -5,7 +5,7 @@
 
     <insert id="CreateMember" parameterType="Member">
         <![CDATA[
-		    insert into members (nick, pw, email) values (#{nick}, #{pw}, #{email});
+		    insert into members (nick, pw, email, role) values (#{nick}, #{pw}, #{email}, 'USER');
 	    ]]>
     </insert>
 
@@ -28,9 +28,13 @@
     </select>
 
     <select id="FindAllMembers" resultType="Member" resultSets="list">
-        <![CDATA[
+    <![CDATA[
 		    select * from members;
 	    ]]>
+    </select>
+
+    <select id="NickCheck" parameterType="string" resultType="int">
+		    select COUNT(*) from members where nick = #{nick};
     </select>
 
 </mapper>

@@ -43,6 +43,10 @@ public class MemberController {
         member.setPw(form.getPw());
         member.setEmail(form.getEmail());
 
+        int result = memberService.nickCheck(member.getNick());
+        if(result >= 1)
+            return "/member/create_fail";
+
         memberService.create(member);
 
         return "redirect:/";

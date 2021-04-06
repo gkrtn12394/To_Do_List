@@ -49,4 +49,10 @@ public class PostgresMemberRepository implements MemberRepository {
     public List<Member> findAllMembers() {
         return sqlSession.selectList("Member.FindAllMembers");
     }
+
+    @Override
+    public int nickCheck(String nick) {
+        int result = sqlSession.selectOne("Member.NickCheck", nick);
+        return result;
+    }
 }

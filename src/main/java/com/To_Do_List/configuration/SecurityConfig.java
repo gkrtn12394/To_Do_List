@@ -37,15 +37,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         web.authorizeRequests()
                 .antMatchers("/").permitAll()
                 .antMatchers("/login").permitAll()
-                .antMatchers("/login-check").permitAll()
-                .antMatchers("/join").permitAll()
                 .antMatchers("/items").permitAll()
+                .antMatchers("/member/create").permitAll()
                 .antMatchers("/members").hasRole("USER")
-                .antMatchers("/members/**").hasRole("USER")
+                .antMatchers("/member/**").hasRole("USER")
                 .anyRequest().authenticated()
-                .and()
+                    .and()
                 .formLogin()
-                .defaultSuccessUrl("/");
+                .defaultSuccessUrl("/")
+                    .and()
+                .logout();
     }
 
     @Override

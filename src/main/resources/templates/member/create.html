@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
 <body>
-    <form action="/member/create" method="post">
+    <form th:action="@{/member/create}" method="post">
         <div class="container">
             <label for="nick">nick</label>
             <input type="text" id="nick" name="nick" placeholder="nick을 입력하세요.">

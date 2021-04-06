@@ -48,9 +48,16 @@ public class MemberService implements UserDetailsService {
         return memberRepository.findAllMembers();
     }
 
+    public int nickCheck(String nick) {
+        return memberRepository.nickCheck(nick);
+    }
+
     @Override
     public UserDetails loadUserByUsername(String nick) throws UsernameNotFoundException {
-        Member member = memberRepository.findMemberByNick(nick).get();
+        Member member = memberRepository.findMemberByNick(nick).orElseThrow(() -> new UsernameNotFoundException("존재하지 않은 사용자"));
+
+        if(member == null)
+            return null;
 
         List<GrantedAuthority> authorities = new ArrayList<>();
         authorities.add(new SimpleGrantedAuthority("ROLE_USER"));
