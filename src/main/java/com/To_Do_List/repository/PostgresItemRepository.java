@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public class PostgresItemRepository implements ItemRepository{
@@ -19,30 +20,41 @@ public class PostgresItemRepository implements ItemRepository{
 
     @Override
     public int createItem(Item item) {
-        int n = sqlSession.insert("Item.CreateItem", item);
-
-        if (n > 0) return 1;
-        return -1;
+        return sqlSession.insert("Item.CreateItem", item);
     }
 
     @Override
     public int updateItem(Item item) {
-        int n = sqlSession.update("Item.UpdateItem", item);
-
-        if (n > 0) return 1;
-        return -1;
+        return sqlSession.update("Item.UpdateItem", item);
     }
 
     @Override
-    public int deleteItem(long id) {
-        int n = sqlSession.delete("Item.DeleteItem", id);
-
-        if (n > 0) return 1;
-        return -1;
+    public int deleteItem(Item item) {
+        return sqlSession.delete("Item.DeleteItem", item);
     }
 
     @Override
-    public List<Item> findAll(String nick) {
-        return sqlSession.selectList("Item.FindItems", nick);
+    public int checkUserExist(String userNick) {
+        return sqlSession.selectOne("Item.CheckUserExist", userNick);
+    }
+
+    @Override
+    public List<Item> findItemByUserNick(String userNick) {
+        return sqlSession.selectList("Item.FindItemByUserNick", userNick);
+    }
+
+    @Override
+    public int checkItemExist(long id) {
+        return sqlSession.selectOne("Item.CheckItemExist", id);
+    }
+
+    @Override
+    public Optional<Item> findItemById(long id) {
+        return sqlSession.selectOne("Item.FindItemById", id);
+    }
+
+    @Override
+    public List<Item> findAll() {
+        return sqlSession.selectList("Item.FindItems");
     }
 }

@@ -1,5 +1,9 @@
 package com.To_Do_List.controller.form;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
+import java.util.Date;
+
 public class ItemForm {
     private long id;
     private String title;
@@ -7,6 +11,7 @@ public class ItemForm {
     private String status;
     private String regDate;
     private String dueDate;
+    private String userNick;
 
     public long getId() { return id; }
     public void setId(long id) { this.id = id; }
@@ -42,5 +47,12 @@ public class ItemForm {
     }
     public void setDueDate(String dueDate) {
         this.dueDate = dueDate;
+    }
+
+    public String getUserNick() {
+        return userNick;
+    }
+    public void setUserNick(String userNick) {
+        this.userNick = userNick;
     }
 }

@@ -1,12 +1,15 @@
 package com.To_Do_List.domain;
 
+import java.util.Date;
+
 public class Item {
     private long id;
     private String title;
     private String note;
     private String status;
-    private String regDate;
-    private String dueDate;
+    private Date regDate;
+    private Date dueDate;
+    private String userNick;
 
     public long getId() {
         return id;
@@ -36,17 +39,24 @@ public class Item {
         this.status = status;
     }
 
-    public String getRegDate() {
+    public Date getRegDate() {
         return regDate;
     }
-    public void setRegDate(String regDate) {
+    public void setRegDate(Date regDate) {
         this.regDate = regDate;
     }
 
-    public String getDueDate() {
+    public Date getDueDate() {
         return dueDate;
     }
-    public void setDueDate(String dueDate) {
+    public void setDueDate(Date dueDate) {
         this.dueDate = dueDate;
+    }
+
+    public String getUserNick() {
+        return userNick;
+    }
+    public void setUserNick(String userNick) {
+        this.userNick = userNick;
     }
 }

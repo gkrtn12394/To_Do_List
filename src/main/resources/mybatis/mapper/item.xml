@@ -3,4 +3,54 @@
 
 <mapper namespace="Item">
 
+    <insert id="CreateItem" parameterType="Item">
+        <![CDATA[
+		    insert into items (title, note, status, regdate, duedate, usernick)
+		    values (#{title}, #{note}, #{status}, #{regDate}, #{dueDate}, #{userNick});
+	    ]]>
+    </insert>
+
+    <update id="UpdateItem" parameterType="Item">
+        <![CDATA[
+		    update items set title=#{title} note=#{note} status=#{status} regdate=#{regDate} duedate=#{dueDate} usernick=#{userNick}
+		    where id = #{id};
+	    ]]>
+    </update>
+
+    <delete id="DeleteItem" parameterType="Item">
+        <![CDATA[
+		    delete from items where usernick = #{userNick} and id = #{id};
+	    ]]>
+    </delete>
+
+    <select id="CheckUserExist" parameterType="string" resultType="int">
+        <![CDATA[
+		    select COUNT(*) from members where nick = #{userNick};
+	    ]]>
+    </select>
+
+    <select id="FindItemByUserNick" parameterType="string" resultType="Item">
+        <![CDATA[
+		    select * from items where usernick = #{userNick};
+	    ]]>
+    </select>
+
+    <select id="FindItemById" parameterType="long" resultType="Item">
+        <![CDATA[
+		    select * from items where id = #{id};
+	    ]]>
+    </select>
+
+    <select id="CheckItemExist" parameterType="long" resultType="int">
+        <![CDATA[
+		    select COUNT(*) from items where id = #{id};
+	    ]]>
+    </select>
+
+    <select id="FindAllItems" resultType="Item" resultSets="list">
+        <![CDATA[
+		    select * from items;
+	    ]]>
+    </select>
+
 </mapper>
